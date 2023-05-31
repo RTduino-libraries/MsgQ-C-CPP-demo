@@ -10,8 +10,13 @@
  */
 
 #include <Adafruit_AHTX0.h>
-#include <rtthread.h>
+#include <RTduino.h>
 #include "common.h"
+
+/*New thread configuration*/
+#define THREAD_PRIORITY 21
+#define THREAD_STACK_SIZE 1024
+#define THREAD_TIMESLICE 5
 
 rt_thread_t tid = RT_NULL;
 Adafruit_AHTX0 aht;
@@ -19,7 +24,7 @@ Adafruit_AHTX0 aht;
 struct rt_messagequeue mq;
 rt_uint8_t msg_pool[2048];
 
-void aht_setup()
+static void aht_setup(void)
 {
     Serial.begin();
     Serial.println("Adafruit AHT10/AHT20 demo!");
@@ -32,9 +37,9 @@ void aht_setup()
 
     Serial.println("AHT10 or AHT20 found");
 
-    rt_mq_init(&mq,"msgQ",&msg_pool[0],sizeof(struct data),sizeof(msg_pool),RT_IPC_FLAG_FIFO);
+    rt_mq_init(&mq, "c/cpp-RTduino", &msg_pool[0], sizeof(struct data), sizeof(msg_pool), RT_IPC_FLAG_FIFO);
 
-    tid = rt_thread_create("thread", thread_entry, RT_NULL, THREAD_STACK_SIZE, THREAD_PRIORITY, THREAD_TIMESLICE);
+    tid = rt_thread_create("c-consumer", thread_entry, RT_NULL, THREAD_STACK_SIZE, THREAD_PRIORITY, THREAD_TIMESLICE);
 
     if(tid != RT_NULL)
     {
@@ -46,7 +51,7 @@ void aht_setup()
     }
 }
 
-void aht_loop()
+static void aht_loop(void)
 {
     sensors_event_t humidity, temp;
     struct data Data;
@@ -60,4 +65,4 @@ void aht_loop()
 
     delay(500);
 }
-RTDUINO_SKETCH_LOADER("AHTX0", aht_setup, aht_loop);
+RTDUINO_SKETCH_LOADER("cpp-producer", aht_setup, aht_loop);

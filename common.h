@@ -16,16 +16,10 @@
 extern "C" {
 #endif
 
-/*New thread configuration*/
-#define THREAD_PRIORITY 21
-#define THREAD_STACK_SIZE 1024
-#define THREAD_TIMESLICE 5
-
 void thread_entry(void *parameter);
 
 /*msg queue control block*/
 extern struct rt_messagequeue mq;
-extern rt_uint8_t msg_pool[2048];
 
 /*data*/
 struct data{
