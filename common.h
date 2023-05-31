@@ -3,9 +3,12 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  *
+ * https://github.com/RTduino/RTduino
+ * https://gitee.com/rtduino/RTduino
+ *
  * Change Logs:
  * Date           Author            Notes
- * 2023-02-04     Stanley Lwin      first version
+ * 2023-02-17     Stanley Lwin      first version
  * 2023-05-31     Chushicheng       re-organize
  */
 
@@ -16,17 +19,16 @@
 extern "C" {
 #endif
 
-void thread_entry(void *parameter);
+void consumer_thread_entry(void *parameter);
 
 /*msg queue control block*/
-extern struct rt_messagequeue mq;
+extern rt_mq_t rtduino_mq;
 
 /*data*/
-struct data{
+typedef struct {
     volatile float temp;
     volatile float humidity;
-};
-typedef struct data Data;
+}rtduino_mq_data;
 
 #ifdef __cplusplus
 }

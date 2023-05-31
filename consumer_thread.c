@@ -3,9 +3,12 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  *
+ * https://github.com/RTduino/RTduino
+ * https://gitee.com/rtduino/RTduino
+ *
  * Change Logs:
  * Date           Author            Notes
- * 2023-02-04     Stanley Lwin      first version
+ * 2023-02-17     Stanley Lwin      first version
  * 2023-05-31     Chushicheng       re-organize
  */
 
@@ -13,16 +16,17 @@
 #include "common.h"
 
 /*Entry function for tid*/
-void thread_entry(void *parameter)
+void consumer_thread_entry(void *parameter)
 {
-    struct data mainData;
+    rtduino_mq_data data;
+
     while(1)
     {
         /* Receive messages from the message queue */
-        if (rt_mq_recv(&mq, &mainData, sizeof(struct data), RT_WAITING_FOREVER) == RT_EOK)
+        if (rt_mq_recv(rtduino_mq, &data, sizeof(rtduino_mq_data), RT_WAITING_FOREVER) == RT_EOK)
         {
-            rt_kprintf("Temperature: %f\n",mainData.temp);
-            rt_kprintf("Humidity: %f\n",mainData.humidity);
+            rt_kprintf("Temperature: %f *C\n", data.temp);
+            rt_kprintf("Humidity: %f %%\n", data.humidity);
         }
     }
 }
