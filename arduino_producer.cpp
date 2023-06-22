@@ -70,4 +70,4 @@ static void aht_loop(void)
 
     delay(2000);
 }
-RTDUINO_SKETCH_LOADER("cpp-producer", aht_setup, aht_loop);
+RTDUINO_SKETCH_LOADER("cpp-aht-producer", aht_setup, aht_loop);
