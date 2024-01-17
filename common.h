@@ -21,16 +21,17 @@ extern "C" {
 
 void consumer_thread_entry(void *parameter);
 
-/*msg queue control block*/
+/* msg queue control block */
 extern rt_mq_t rtduino_mq;
 
-/*data*/
+/* data */
 typedef struct {
     volatile float temp;
     volatile float humidity;
-}rtduino_mq_data;
+} rtduino_mq_data;
 
 #ifdef __cplusplus
 }
 #endif
-#endif
+
+#endif /* __COMMON_H__ */

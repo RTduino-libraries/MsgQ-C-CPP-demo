@@ -15,7 +15,7 @@
 #include <rtthread.h>
 #include "common.h"
 
-/*Entry function for tid*/
+/* Entry function for tid */
 void consumer_thread_entry(void *parameter)
 {
     rtduino_mq_data data;

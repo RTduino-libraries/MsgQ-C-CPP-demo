@@ -1,5 +1,4 @@
-# RTduino C/C++ Message Queue Demo
-## RTduino C/C++ 消息队列通信示例
+# RTduino C/C++ 消息队列通信示例
 
 [English](README.md) | **中文**
 
