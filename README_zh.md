@@ -4,3 +4,6 @@
 
 本示例展示了如何在RTduino下，借助RT-Thread的消息队列通信机制，实现RTduino/Arduino C++代码，与RT-Thread C线程之间的数据通信。
 
+参考文档：
+
+https://docs.rtduino.com/#/zh/project-examples/demos/MsgQ-C-CPP/MsgQ-C-CPP
